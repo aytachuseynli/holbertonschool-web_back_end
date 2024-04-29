@@ -3,7 +3,8 @@
 """
 Module: 7-to_kv
 Contains:
-    - to_kv: Returns a tuple containing a string and the square of an int or float
+    - to_kv: Returns a tuple containing a string
+    and the square of an int or float
 """
 
 from typing import Union, Tuple
