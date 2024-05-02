@@ -11,7 +11,7 @@ import asyncio
 import random
 
 
-async def async_generator() -> float:
+async def async_generator() -> Generator[float, None, None]:
     """
     Asynchronous generator that yields random numbers.
     """
