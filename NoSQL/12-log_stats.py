@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-#!/usr/bin/env python3
 """log stats from collection"""
 from pymongo import MongoClient
 
