@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """log stats from collection"""
-from pymongo import MongoClient
+from pymongo
 
 
 if __name__ == "__main__":
