@@ -4,8 +4,6 @@ Module for simple pagination with a Server class.
 """
 import csv
 from typing import List, Tuple
-from itertools import islice
-
 
 def index_range(page: int, page_size: int) -> Tuple[int, int]:
     """
@@ -39,34 +37,13 @@ class Server:
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """Return the appropriate page of the dataset.
         """
-        assert isinstance(page, int) and page > 0, "page must be a positive integer"
-        assert isinstance(page_size, int) and page_size > 0, "page_size must be a positive integer"
+        assert type(page) is int and page > 0
+        assert type(page_size) is int and page_size > 0
 
-        start_index, end_index = index_range(page, page_size)
-        dataset = self.dataset()
+        indexes = index_range(page, page_size)
+        s, e = indexes[0], indexes[1]
 
-        return list(islice(dataset, start_index, end_index))
-
-
-if __name__ == "__main__":
-    # Test cases
-    server = Server()
-
-    try:
-        should_err = server.get_page(-10, 2)
-    except AssertionError:
-        print("AssertionError raised with negative values")
-
-    try:
-        should_err = server.get_page(0, 0)
-    except AssertionError:
-        print("AssertionError raised with 0")
-
-    try:
-        should_err = server.get_page(2, 'Bob')
-    except AssertionError:
-        print("AssertionError raised when page and/or page_size are not ints")
-
-    print(server.get_page(1, 3))
-    print(server.get_page(3, 2))
-    print(server.get_page(3000, 100))
+        try:
+            return self.dataset()[s:e]
+        except IndexError:
+            return []
