@@ -5,15 +5,6 @@ Module for simple pagination with a Server class.
 import csv
 from typing import List, Tuple
 
-def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    """
-    Return a tuple of start and end indexes corresponding to the range
-    of indexes to return in a list for a particular pagination.
-    """
-    start_index = (page - 1) * page_size
-    end_index = page * page_size
-    return start_index, end_index
-
 
 class Server:
     """Server class to paginate a database of popular baby names.
@@ -47,3 +38,13 @@ class Server:
             return self.dataset()[s:e]
         except IndexError:
             return []
+
+
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
+    """
+    Return a tuple of start and end indexes corresponding to the range
+    of indexes to return in a list for a particular pagination.
+    """
+    start_index = (page - 1) * page_size
+    end_index = page * page_size
+    return start_index, end_index
