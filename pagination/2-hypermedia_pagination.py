@@ -3,9 +3,8 @@
 Module for hypermedia pagination with a Server class.
 """
 import csv
-from typing import List, Dict, Any
-from itertools import islice
 import math
+from typing import List, Tuple
 
 
 class Server:
@@ -41,7 +40,7 @@ class Server:
         except IndexError:
             return []
 
-    def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict[str, Any]:
+    def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
         """Return hypermedia pagination info for the given page.
         """
         data = self.get_page(page=page, page_size=page_size)
