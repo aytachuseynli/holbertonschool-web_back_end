@@ -39,20 +39,28 @@ class Server:
         return self.__indexed_dataset
 
     def get_hyper_index(self, index: int = None, page_size: int = 10) -> Dict:
-        """Return hypermedia pagination info for the given index.
         """
-        assert index is None or (isinstance(index, int) and 0 <= index < len(self.indexed_dataset())), \
-            "index must be None or an integer in the valid range"
-        assert isinstance(page_size, int) and page_size > 0, "page_size must be a positive integer"
+        Returning dict
+        """
+        dataset_len = len(self.dataset())
+        assert 0 <= index < dataset_len
 
-        dataset = self.indexed_dataset()
-        if index is None:
-            index = 0
-        next_index = index + page_size
+        indexed_dataset = self.indexed_dataset()
+        page_dict = {}
+
+        i = index
+        while (len(page_dict) < page_size and i < dataset_len):
+            if i in indexed_dataset:
+                page_dict[i] = indexed_dataset[i]
+            i += 1
+
+        page = list(page_dict.values())
+        vals = len(page)
+        keys = page_dict.keys()
 
         return {
-            "index": index,
-            "data": [dataset[i] for i in range(index, min(next_index, len(dataset)))],
-            "page_size": page_size,
-            "next_index": next_index if next_index < len(dataset) else None
+                'index': index,
+                'next_index': max(keys) + 1,
+                'page_size': vals,
+                'data': page
         }
