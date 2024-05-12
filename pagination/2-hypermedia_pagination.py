@@ -8,16 +8,6 @@ from itertools import islice
 import math
 
 
-def index_range(page: int, page_size: int) -> tuple:
-    """
-    Return a tuple of start and end indexes corresponding to the range
-    of indexes to return in a list for a particular pagination.
-    """
-    start_index = (page - 1) * page_size
-    end_index = page * page_size
-    return start_index, end_index
-
-
 class Server:
     """Server class to paginate a database of popular baby names.
     """
@@ -64,16 +54,13 @@ class Server:
             "prev_page": prev_page,
             "total_pages": total_pages
         }
+    
 
-
-if __name__ == "__main__":
-    # Test cases
-    server = Server()
-
-    print(server.get_hyper(1, 2))
-    print("---")
-    print(server.get_hyper(2, 2))
-    print("---")
-    print(server.get_hyper(100, 3))
-    print("---")
-    print(server.get_hyper(3000, 100))
+def index_range(page: int, page_size: int) -> tuple:
+    """
+    Return a tuple of start and end indexes corresponding to the range
+    of indexes to return in a list for a particular pagination.
+    """
+    start_index = (page - 1) * page_size
+    end_index = page * page_size
+    return start_index, end_index
