@@ -27,7 +27,7 @@ class Server:
         return self.__dataset
 
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
-        """Return the appropriate page of the dataset.
+        """Getting page
         """
         assert type(page) is int and page > 0
         assert type(page_size) is int and page_size > 0
@@ -41,7 +41,7 @@ class Server:
             return []
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> dict:
-        """Return hypermedia pagination info for the given page.
+        """Returning dictionary with info about page
         """
         data = self.get_page(page=page, page_size=page_size)
         total_len = len(self.dataset())
@@ -55,13 +55,8 @@ class Server:
                 "prev_page": page - 1 if page > 1 else None,
                 "total_pages": total_pages
             }
-    
 
-def index_range(page: int, page_size: int) -> tuple:
-    """
-    Return a tuple of start and end indexes corresponding to the range
-    of indexes to return in a list for a particular pagination.
-    """
-    start_index = (page - 1) * page_size
-    end_index = page * page_size
-    return start_index, end_index
+
+def index_range(page: int, page_size: int) -> Tuple[int, int]:
+    """Find page size"""
+    return (page_size * (page - 1), page_size * page)
