@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-// eslint-disable-next-line import/extensions
 import ClassRoom from './0-classroom';
 
 function initializeRooms() {
@@ -9,5 +7,3 @@ function initializeRooms() {
     new ClassRoom(34)
   ];
 }
-
-export default initializeRooms;
