@@ -1,4 +1,4 @@
-/*9-hoisting.js*/
+/* 9-hoisting.js */
 
 export class HolbertonClass {
   constructor(year, location) {
