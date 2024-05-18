@@ -1,9 +1,10 @@
+/*Import Classroom */
 import ClassRoom from './0-classroom';
 
-function initializeRooms() {
-  return [
-    new ClassRoom(19),
-    new ClassRoom(20),
-    new ClassRoom(34)
-  ];
+export default function initializeRooms() {
+  let room1 = new ClassRoom(19);
+  let room2 = new ClassRoom(20);
+  let room3 = new ClassRoom(34);
+
+  return [room1, room2, room3];
 }

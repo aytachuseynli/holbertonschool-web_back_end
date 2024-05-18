@@ -1,3 +1,4 @@
+/*Define the class HolbertonsCourse*/
 export default class HolbertonCourse {
     constructor(name, length, students) {
       this._name = this._length = this._students = null;
@@ -37,4 +38,3 @@ export default class HolbertonCourse {
       this._students = value;
     }
   }
-
