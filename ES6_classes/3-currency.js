@@ -1,34 +1,47 @@
-// 3-currency.js
-export default class Currency {
-    constructor(code, name) {
-      this._code = '';
-      this._name = '';
-  
-      this.code = code;
-      this.name = name;
-    }
-  
-    get code() {
-      return this._code;
-    }
-    set code(value) {
-      if (typeof value !== 'string') {
-        throw new TypeError('Code must be a string');
+/*Define a class Currency*/
+/* eslint-disable */
+export default class HolbertonCourse {
+  constructor(name, length, students) {
+      if (typeof name !== 'string') throw TypeError('Name must be a string'); {
+          this._name = name;
       }
-      this._code = value;
-    }
-  
-    get name() {
+      if (typeof length !== 'number') throw TypeError('Length must be a number'); {
+          this._length = length;
+      }
+      if (!Array.isArray(students)) throw TypeError('Students must be an array'); {
+          this._students = students;
+      }
+  }
+
+  get name() {
       return this._name;
-    }
-    set name(value) {
-      if (typeof value !== 'string') {
-        throw new TypeError('Name must be a string');
+  }
+
+  set name(newName) {
+      if (typeof newName !== 'string') throw TypeError('Name must be a string'); {
+          this._name = newName;
       }
-      this._name = value;
-    }
-  
-    displayFullCurrency() {
-      return `${this._name} (${this._code})`;
-    }
- }
+  }
+
+
+  get length() {
+      return this._length;
+  }
+
+  set length(newLength) {
+      if (typeof newLength !== 'number') throw TypeError('Length must be a number'); {
+          this._length = newLength;
+      }
+  }
+
+
+  get students() {
+      return this._students;
+  }
+
+  set students(newStudents) {
+      if (!Array.isArray(newStudents)) throw TypeError('Students must be an array'); {
+          this._students = newStudents;
+      }
+  }
+}

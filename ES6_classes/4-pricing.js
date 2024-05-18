@@ -1,43 +1,59 @@
-// 4-pricing.js
+/*4-pricing.js*/
+
 import Currency from './3-currency.js';
 
-export default class Pricing {
-  constructor(amount, currency) {
-    this._amount = 0;
-    this._currency = null;
 
-    this.amount = amount;
-    this.currency = currency;
-  }
-
-  get amount() {
-    return this._amount;
-  }
-  set amount(value) {
-    if (typeof value !== 'number') {
-      throw new TypeError('Amount must be a number');
+class Pricing {
+    constructor (amount, currency) {
+        if (typeof amount === 'number'
+        && currency instanceof Currency) {
+            this._amount = amount;
+            this._currency = currency;
+        }
+        else {
+            throw TypeError('Invalid attribute type');
+        }
     }
-    this._amount = value;
-  }
 
-  get currency() {
-    return this._currency;
-  }
-  set currency(value) {
-    if (!(value instanceof Currency)) {
-      throw new TypeError('Currency must be an instance of Currency');
+    get amount() {
+        return this._amount;
     }
-    this._currency = value;
-  }
 
-  displayFullPrice() {
-    return `${this._amount} ${this._currency.name} (${this._currency.code})`;
-  }
-
-  static convertPrice(amount, conversionRate) {
-    if (typeof amount !== 'number' || typeof conversionRate !== 'number') {
-      throw new TypeError('Both amount and conversionRate must be numbers');
+    set amount(newAmount) {
+        if (typeof newAmount === 'number') {
+            this._amount = newAmount;
+        }
+        else {
+            throw TypeError('Amount must be a number');
+        }
     }
-    return amount * conversionRate;
-  }
+
+    get currency() {
+        return this._currency;
+    }
+
+    set currency(newCurrency) {
+        if (newCurrency instanceof Currency) {
+            this._currency = newCurrency;
+        }
+        else {
+            throw TypeError('Currency must be a Currency');
+        }
+    }
+
+    displayFullPrice() {
+        return `${this.amount} ${this.currency.displayFullCurrency()}`;
+    }
+
+    static convertPrice(amount, conversionRate) {
+        if (typeof amount === 'number'
+        && typeof conversionRate === 'number') {
+            return new Pricing(amount * conversionRate, this.currency);
+        }
+        else {
+            throw TypeError('Invalid attribute type');
+        }
+    }
 }
+
+export default Pricing;

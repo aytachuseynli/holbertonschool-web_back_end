@@ -1,5 +1,4 @@
-const cloneCarSymbol = Symbol('cloneCar');
-
+/*Define la clase HolbertonClass*/
 export default class Car {
   constructor(brand, motor, color) {
     this._brand = brand;
@@ -7,24 +6,12 @@ export default class Car {
     this._color = color;
   }
 
-  get brand() {
-    return this._brand;
-  }
-
-  get motor() {
-    return this._motor;
-  }
-
-  get color() {
-    return this._color;
-  }
-
-  [cloneCarSymbol]() {
-    const { _brand, _motor, _color } = this;
-    return new this.constructor(_brand, _motor, _color);
+  static get [Symbol.species]() {
+    return this;
   }
 
   cloneCar() {
-    return this[cloneCarSymbol]();
+    const Species = this.constructor[Symbol.species];
+    return new Species(this._brand, this._motor, this._color);
   }
 }
